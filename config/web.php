@@ -52,18 +52,20 @@ $config = [
         'assetManager' => [
             'bundles' => [
                 'yii\web\JqueryAsset' => [
-                    'sourcePath' => null,   // не публиковать пакет
                     'js' => [
-                        // Last working from CDN
-                        'https://code.jquery.com/jquery-3.7.1.min.js',
+                        YII_ENV_DEV ? 'jquery.js' : 'jquery.min.js'
                     ]
                 ],
-                'yii\widgets\PjaxAsset' => [
-                    'sourcePath' => null,   // не публиковать пакет
-                    'js' => [
-                        'https://cdn.jsdelivr.net/npm/jquery-pjax@2.0.1/jquery.pjax.min.js',
+                'yii\bootstrap\BootstrapAsset' => [
+                    'css' => [
+                        YII_ENV_DEV ? 'css/bootstrap.css' : 'css/bootstrap.min.css',
                     ]
                 ],
+                'yii\bootstrap\BootstrapPluginAsset' => [
+                    'js' => [
+                        YII_ENV_DEV ? 'js/bootstrap.js' : 'js/bootstrap.min.js',
+                    ]
+                ]
             ],
         ],
         'db' => $db,
@@ -77,6 +79,11 @@ $config = [
 
     ],
     'params' => $params,
+    'modules' => [
+        'phones' => [
+            'class' => 'app\modules\phones\Phones',
+        ],
+    ],
 ];
 
 if (YII_ENV_DEV) {

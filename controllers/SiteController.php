@@ -2,18 +2,19 @@
 
 namespace app\controllers;
 
-use app\components\WebController;
 use Yii;
-use yii\filters\AccessControl;
 use yii\helpers\Url;
-use yii\helpers\VarDumper;
-use yii\web\Controller;
 use yii\web\Request;
 use yii\web\Response;
-use yii\filters\VerbFilter;
-use app\models\LoginForm;
-use app\models\ContactForm;
+use yii\web\Controller;
 use yii\web\UrlManager;
+use app\models\LoginForm;
+use yii\helpers\VarDumper;
+use app\models\ContactForm;
+use yii\filters\VerbFilter;
+use yii\helpers\StringHelper;
+use yii\filters\AccessControl;
+use app\components\WebController;
 
 
 class SiteController extends WebController
@@ -79,6 +80,9 @@ class SiteController extends WebController
     public function actionLogin()
     {
         if (!Yii::$app->user->isGuest) {
+            # Вывести flash-сообщение вы уже авторизованы    
+            $username = StringHelper::mb_ucfirst(Yii::$app->user->identity->username);
+            Yii::$app->session->setFlash('info',  "{$username} - вы уже авторизованы");
             return $this->goHome();
         }
 
@@ -117,25 +121,16 @@ class SiteController extends WebController
     }
 
     /**
-     * Displays Ajax page.
+     * Отображает страницу пользователя с именем $name
      *
      * @return string
      */
     public function actionUser($name)
     {
         return "Пользователь с именем = " . $name;
+        // TODO: необходимо создать представление для страницы пользователя и возвращать его
     }
 
-    public function actionDev($id = null)
-    {
-      //   VarDumper::dump((new yii\web\UrlManager)->parseRequest(Yii::$app->request), 10, true);
-      return "Param($id): {$id} | ControllerID: {$this->getUniqueId()} \r\n | ActionID: {$this->action->id}";
-    }
-
-    public function actionRoute()
-    {
-        return "site/about internal route converts to: " . Url::toRoute(['site/about'], true);
-
-    }
+   
 
 }

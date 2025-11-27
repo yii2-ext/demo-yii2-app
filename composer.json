@@ -1,15 +1,21 @@
 {
-    "name": "yiisoft/yii2-timeweb",
-    "description": "Yii 2 Project by Sergey Mochalov",
-    "keywords": ["yii2", "framework", "basic", "project template"],
+    "name": "proweb/yii2-demo",
+    "description": "Yii 2 demo project",
+    "keywords": [
+        "yii2",
+        "framework",
+        "basic",
+        "project template"
+    ],
     "homepage": "https://www.yiiframework.com/",
     "type": "project",
     "license": "BSD-3-Clause",
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "require": {
-        "php": ">=7.4.0",
-        "yiisoft/yii2": "^2.0",
-        "yiisoft/yii2-bootstrap5": "^2.0",
+        "php": ">=8.1",
+        "vlucas/phpdotenv": "^5.6",
+        "yiisoft/yii2": "^2.0.53|^22",
+        "yiisoft/yii2-bootstrap5": "^2.0.50|^22",
         "yiisoft/yii2-symfonymailer": "^2.0"
     },
     "require-dev": {
@@ -27,9 +33,9 @@
     },
     "config": {
         "allow-plugins": {
-            "yiisoft/yii2-composer" : true
+            "yiisoft/yii2-composer": true
         },
-        "process-timeout": 1800,
+        "process-timeout": 0,
         "fxp-asset": {
             "enabled": false
         }
